@@ -3,6 +3,7 @@ package com.daxuepai.gaoxiao.controller;
 import com.alibaba.fastjson.JSON;
 import com.daxuepai.gaoxiao.model.Code;
 import com.daxuepai.gaoxiao.model.Result;
+import com.daxuepai.gaoxiao.model.ResultStatus;
 import com.daxuepai.gaoxiao.service.CodeService;
 import com.zhenzi.sms.ZhenziSmsClient;
 import org.slf4j.Logger;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 
 @Controller
@@ -33,23 +35,30 @@ public class LoginController {
     @ResponseBody
     public String getcode(@RequestParam("phone") String phone){
         //前段校验phone
+
         String code = String.valueOf(random.nextInt(99999));
         ZhenziSmsClient client = new ZhenziSmsClient(apiUrl,appId,appSecret);
+        int id = -1;
         try {
             String result = client.send(phone,"【大学派】你的验证码是:" + code + ",该验证码有效期5分钟，消息来自中国最大的高校论坛[大学派]");
             Code generatedCode = new Code();
             generatedCode.setCode(code);
             Date now = new Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//            Date exiredTime = sdf.format(now);
+            generatedCode.setCreateTime(now);
+            Date exiredTime = new Date(now.getTime()+300000);
+            generatedCode.setExpiredTime(exiredTime);
 
-            generatedCode.setCreateTime(new Date());
-
-            codeService.insertCode();
+            id = codeService.insertCode(generatedCode);
         } catch (Exception e) {
             logger.error("榛子云发送短信失败！");
             e.printStackTrace();
         }
+        Result result = new Result();
+        result.setStatus(ResultStatus.Ok);
+        HashMap<String,Integer> map = new HashMap<>();
+        map.put("id", id);
+        result.setMsg(JSON.toJSONString(map));
+        return JSON.toJSONString(result);
     }
 
     @RequestMapping("/register")
@@ -59,7 +68,6 @@ public class LoginController {
                            @RequestParam("school") int schoolId,
                            @RequestParam("username") String username){
         Result result = new Result();
-
         return JSON.toJSONString(result);
     }
 }

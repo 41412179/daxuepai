@@ -1,16 +1,15 @@
 package com.daxuepai.gaoxiao.model;
 
 public class Result {
-    String status;
+    ResultStatus status;
     String msg;
 
 
-
-    public String getStatus() {
+    public ResultStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ResultStatus status) {
         this.status = status;
     }
 

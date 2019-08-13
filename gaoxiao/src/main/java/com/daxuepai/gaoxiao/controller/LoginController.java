@@ -17,10 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.UUID;
 
 @Controller
 public class LoginController {
@@ -116,14 +120,60 @@ public class LoginController {
 
     private boolean checkCode(String phone, int code) {
         String dbCode = codeService.selectByPhone(phone);
+
         if(dbCode == null){
+            logger.info("dbCode is null");
             return false;
         }else{
+            logger.info("dbCode="+dbCode);
             if(String.valueOf(code).equals(dbCode)){
                 return true;
             }else{
                 return false;
             }
+        }
+    }
+
+    @RequestMapping("/login")
+    public String login(@RequestParam("phone") String phone,
+                        @RequestParam("code") String code,
+                        @RequestParam(value = "isremember", defaultValue = "false") boolean isremember,
+                        HttpServletResponse response){
+        Result result = new Result();
+
+        boolean isSuccess = checkCode(phone,Integer.valueOf(code));
+        if(isSuccess){
+            String ticket = UUID.randomUUID().toString().replaceAll("-", "");
+            Cookie cookie = new Cookie("ticket", ticket);
+            if(isremember){
+                cookie.setMaxAge(3600*24*5);
+                cookie.setPath("/");
+            }else{
+                cookie.setMaxAge(3600*24*5);
+                cookie.setPath("/");
+            }
+            response.addCookie(cookie);
+            User user = new User();
+            user.setTicket(ticket);
+            Date now = new Date();
+            Date timeOut = new Date(now.getTime() + 50000);
+            user.setTicketTimeout(timeOut);
+            user.setPhone(phone);
+            try {
+                userService.updateUser(user);
+            }catch (Exception e){
+                e.printStackTrace();
+                logger.error("登录失败");
+                result.setStatus(ResultStatus.Failed);
+                result.setMsg("登录失败");
+                return JSON.toJSONString(result);
+            }
+            result.setStatus(ResultStatus.Ok);
+            return JSON.toJSONString(result);
+        }else{
+            result.setStatus(ResultStatus.Failed);
+            result.setMsg("验证码校验失败");
+            return JSON.toJSONString(result);
         }
     }
 }

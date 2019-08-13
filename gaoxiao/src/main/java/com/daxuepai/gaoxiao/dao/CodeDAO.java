@@ -11,6 +11,6 @@ public interface CodeDAO {
     @Insert("insert into code (code, phone , create_time, expired_time)values(#{code},#{phone},#{createTime},#{expiredTime})")
     int insert(Code code);
 
-    @Select("select code from code where phone = #{phone} order by create_time limit 1")
+    @Select("select code from code where expired_time > now() and phone = #{phone} order by create_time desc limit 1")
     String select(String phone);
 }

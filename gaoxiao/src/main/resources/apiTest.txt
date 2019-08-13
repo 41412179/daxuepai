@@ -1,0 +1,4 @@
+手机17600172104获取验证码
+http://localhost:8080/getcode?phone=17600172104
+注册
+http://localhost:8080/register?phone=17600172104&code=62904&school=3761&username=iamghd

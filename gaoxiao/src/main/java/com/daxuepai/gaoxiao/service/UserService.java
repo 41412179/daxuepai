@@ -14,4 +14,8 @@ public class UserService {
     public void insertUser(User user) {
         userDAO.insert(user);
     }
+
+    public void updateUser(User user) {
+        userDAO.update(user);
+    }
 }

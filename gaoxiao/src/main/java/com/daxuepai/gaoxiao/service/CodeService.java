@@ -14,4 +14,8 @@ public class CodeService {
     public int insertCode(Code code) {
         return codeDAO.insert(code);
     }
+
+    public String selectByPhone(String phone) {
+        return codeDAO.select(phone);
+    }
 }

@@ -10,6 +10,7 @@ public class User {
     String headurl;
     String ticket;
     Date ticketTimeout;
+    int ticketStatus;
 
 
 
@@ -67,5 +68,13 @@ public class User {
 
     public void setTicketTimeout(Date ticketTimeout) {
         this.ticketTimeout = ticketTimeout;
+    }
+
+    public int getTicketStatus() {
+        return ticketStatus;
+    }
+
+    public void setTicketStatus(int ticketStatus) {
+        this.ticketStatus = ticketStatus;
     }
 }

@@ -135,6 +135,7 @@ public class LoginController {
     }
 
     @RequestMapping("/login")
+    @ResponseBody
     public String login(@RequestParam("phone") String phone,
                         @RequestParam("code") String code,
                         @RequestParam(value = "isremember", defaultValue = "false") boolean isremember,
@@ -175,5 +176,25 @@ public class LoginController {
             result.setMsg("验证码校验失败");
             return JSON.toJSONString(result);
         }
+    }
+
+    @RequestMapping("/logout")
+    @ResponseBody
+    public String logout(){
+        Result result = new Result();
+        User user = new User();
+        user.setTicket("");
+        user.setTicketTimeout(null);
+        //通过ticket注销
+        try {
+            userService.updateUser(user);
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("退出失败！");
+            result.setStatus(ResultStatus.Failed);
+            return JSON.toJSONString(result);
+        }
+        result.setStatus(ResultStatus.Ok);
+        return JSON.toJSONString(result);
     }
 }

@@ -18,4 +18,8 @@ public class UserService {
     public void updateUser(User user) {
         userDAO.update(user);
     }
+
+    public User selectByTicket(String ticket) {
+        return userDAO.selectByTicket(ticket);
+    }
 }

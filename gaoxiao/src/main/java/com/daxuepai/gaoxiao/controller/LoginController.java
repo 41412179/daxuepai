@@ -2,10 +2,7 @@ package com.daxuepai.gaoxiao.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.daxuepai.gaoxiao.model.Code;
-import com.daxuepai.gaoxiao.model.Result;
-import com.daxuepai.gaoxiao.model.ResultStatus;
-import com.daxuepai.gaoxiao.model.User;
+import com.daxuepai.gaoxiao.model.*;
 import com.daxuepai.gaoxiao.service.CodeService;
 import com.daxuepai.gaoxiao.service.UserService;
 import com.zhenzi.sms.ZhenziSmsClient;
@@ -37,6 +34,9 @@ public class LoginController {
 
     @Autowired
     CodeService codeService;
+
+    @Autowired
+    HostHolder hostHolder;
 
     @RequestMapping("/getcode")
     @ResponseBody
@@ -92,6 +92,14 @@ public class LoginController {
                            @RequestParam("school") int schoolId,
                            @RequestParam("username") String username){
         Result result = new Result();
+
+        User user1 = hostHolder.getUser();
+        if(user1 != null){
+            result.setStatus(ResultStatus.Failed);
+            result.setMsg("当前登录账户："+user1.getUsername() + " 请退出后再注册");
+            return JSON.toJSONString(result);
+        }
+
         boolean success = checkCode(phone, code);
         if(success) {
             User user = new User();
@@ -141,6 +149,13 @@ public class LoginController {
                         @RequestParam(value = "isremember", defaultValue = "false") boolean isremember,
                         HttpServletResponse response){
         Result result = new Result();
+        User u = hostHolder.getUser();
+        if(u != null){
+            result.setStatus(ResultStatus.Failed);
+            result.setMsg("当前在线账户："+u.getUsername()+" 请退出后再登录");
+            return JSON.toJSONString(result);
+        }
+
 
         boolean isSuccess = checkCode(phone,Integer.valueOf(code));
         if(isSuccess){
@@ -159,6 +174,7 @@ public class LoginController {
             Date now = new Date();
             Date timeOut = new Date(now.getTime() + 50000);
             user.setTicketTimeout(timeOut);
+            user.setTicketStatus(1);
             user.setPhone(phone);
             try {
                 userService.updateUser(user);
@@ -182,9 +198,16 @@ public class LoginController {
     @ResponseBody
     public String logout(){
         Result result = new Result();
+        User u = hostHolder.getUser();
+        if(u == null){
+            result.setStatus(ResultStatus.Ok);
+            result.setMsg("退出成功");
+            return JSON.toJSONString(result);
+        }
         User user = new User();
-        user.setTicket("");
+        user.setTicket(null);
         user.setTicketTimeout(null);
+        user.setTicketStatus(1);
         //通过ticket注销
         try {
             userService.updateUser(user);

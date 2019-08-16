@@ -37,20 +37,23 @@ public class PassportInterceptor implements HandlerInterceptor {
         if(ticket!= null){
             User user = userService.selectByTicket(ticket);
             if(user == null || user.getTicketTimeout().before(new Date()) || user.getTicketStatus() == 0){
-                return true;
+//                return true;
             }else{
                 hostHolder.setUser(user);
-                return false;
+//                return false;
             }
         }
 
-        return true;
+//        return true;
+        return false;
     }
 
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (modelAndView != null && hostHolder.getUser() != null) {
             modelAndView.addObject("user", hostHolder.getUser());
+        }else{
+            modelAndView.addObject("user", "");
         }
     }
 

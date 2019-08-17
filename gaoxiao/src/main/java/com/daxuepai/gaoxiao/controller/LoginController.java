@@ -218,6 +218,7 @@ public class LoginController {
             return JSON.toJSONString(result);
         }
         result.setStatus(ResultStatus.Ok);
+        result.setMsg("退出成功");
         return JSON.toJSONString(result);
     }
 }

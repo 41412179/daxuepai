@@ -6,6 +6,7 @@ import com.daxuepai.gaoxiao.service.ImportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.io.*;
 import java.util.List;
@@ -16,7 +17,7 @@ public class ImportController {
     @Autowired
     ImportService importService;
 
-    @RequestMapping("/import")
+    @RequestMapping(value = "/import",method = RequestMethod.GET)
     public String importSchoolData(){
         String path = "D:\\Downloads\\gaoxiao\\daxuepai\\gaoxiao\\data\\gaoxiaomingdan.json";
         String result = ReadFile(path);

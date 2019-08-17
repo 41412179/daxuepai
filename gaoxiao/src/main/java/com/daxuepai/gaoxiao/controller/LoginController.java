@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -38,7 +39,7 @@ public class LoginController {
     @Autowired
     HostHolder hostHolder;
 
-    @RequestMapping("/getcode")
+    @RequestMapping(value = "/getcode",method = RequestMethod.GET)
     @ResponseBody
     public String getcode(@RequestParam("phone") String phone){
         //前段校验phone
@@ -85,7 +86,7 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
     @ResponseBody
     public String register(@RequestParam("phone") String phone,
                            @RequestParam("code") int code,
@@ -142,7 +143,7 @@ public class LoginController {
         }
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ResponseBody
     public String login(@RequestParam("phone") String phone,
                         @RequestParam("code") String code,
@@ -194,7 +195,7 @@ public class LoginController {
         }
     }
 
-    @RequestMapping("/logout")
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ResponseBody
     public String logout(){
         Result result = new Result();

@@ -31,7 +31,7 @@ public class SwaggerConfig {
                 .title("大学派接口")
                 .description("大学派后端接口列表")
                 .termsOfServiceUrl("localhost:8080/ruleengine")
-                .contact(new Contact("大学派接口","localhost:8080/ruleengine/swagger-ui.html","1593028064@qq.com"))
+//                .contact(new Contact("大学派接口","localhost:8080/ruleengine/swagger-ui.html","1593028064@qq.com"))
                 .version("1.0")
                 .build();
     }

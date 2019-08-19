@@ -47,5 +47,4 @@ public class LikeController {
         }
         return JSON.toJSONString(result);
     }
-
 }

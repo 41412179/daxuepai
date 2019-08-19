@@ -62,9 +62,4 @@ public class CommentController {
         }
         return JSON.toJSONString(result);
     }
-
-    
-
-
-
 }

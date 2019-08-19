@@ -11,6 +11,7 @@ public class Post {
     Date createTime;
     Date changeTime;
     int schoolId;
+    String tiebaId;
 
     public int getId() {
         return id;
@@ -74,5 +75,13 @@ public class Post {
 
     public void setSchoolId(int schoolId) {
         this.schoolId = schoolId;
+    }
+
+    public String getTiebaId() {
+        return tiebaId;
+    }
+
+    public void setTiebaId(String tiebaId) {
+        this.tiebaId = tiebaId;
     }
 }

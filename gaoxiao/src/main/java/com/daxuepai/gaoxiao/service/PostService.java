@@ -19,6 +19,6 @@ public class PostService {
     }
 
     public List<Post> selectAllListBySchoolId(int row, int count, int schoolId) {
-        return postDAO.selectAllListBySchoolId(row,count,schoolId);
+        return postDAO.selectAllListBySchoolId(schoolId,row,count);
     }
 }

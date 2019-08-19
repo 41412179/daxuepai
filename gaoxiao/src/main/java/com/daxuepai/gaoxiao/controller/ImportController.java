@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.io.*;
 import java.util.List;
 
-@Controller
+//@Controller
 public class ImportController {
 
-    @Autowired
+//    @Autowired
     ImportService importService;
 
-    @RequestMapping(value = "/import",method = RequestMethod.GET)
+//    @RequestMapping(value = "/import",method = RequestMethod.GET)
     public String importSchoolData(){
         String path = "D:\\Downloads\\gaoxiao\\daxuepai\\gaoxiao\\data\\gaoxiaomingdan.json";
         String result = ReadFile(path);
@@ -55,6 +55,7 @@ public class ImportController {
                 try {
                     reader.close();
                 } catch (IOException e1) {
+                    e1.printStackTrace();
                 }
             }
         }

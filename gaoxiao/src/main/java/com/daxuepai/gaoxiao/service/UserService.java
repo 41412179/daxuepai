@@ -24,6 +24,11 @@ public class UserService {
     }
 
     public int selectByPhone(String phone) {
-        return userDAO.selectByPhone(phone);
+        Integer i = userDAO.selectByPhone(phone);
+        if (i == null) {
+            return -1;
+        } else {
+            return i;
+        }
     }
 }

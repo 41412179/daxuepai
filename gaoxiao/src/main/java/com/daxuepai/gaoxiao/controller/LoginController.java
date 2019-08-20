@@ -256,7 +256,7 @@ public class LoginController {
         User u = hostHolder.getUser();
         if(u == null){
             result.setStatus(ResultStatus.Ok);
-            result.setMsg("退出成功");
+            result.setMsg("当前没有用户登录，不需要退出");
             return JSON.toJSONString(result);
         }
         User user = new User();

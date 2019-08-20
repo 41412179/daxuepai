@@ -19,5 +19,5 @@ public interface UserDAO {
     User selectByTicket(String ticket);
 
     @Select("select id from user where phone = #{phone}")
-    int selectByPhone(String phone);
+    Integer selectByPhone(String phone);
 }

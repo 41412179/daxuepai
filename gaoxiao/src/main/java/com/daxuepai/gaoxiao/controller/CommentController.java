@@ -9,6 +9,7 @@ import com.daxuepai.gaoxiao.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,7 +24,7 @@ public class CommentController {
     CommentService commentService;
 
 
-    @RequestMapping("/post/comment/add")
+    @RequestMapping(value = "/post/comment/add",method = RequestMethod.GET)
     @ResponseBody
     public String comment(@RequestParam("postId") int postId,
                           @RequestParam("content") String content){
@@ -43,7 +44,7 @@ public class CommentController {
         return JSON.toJSONString(result);
     }
 
-    @RequestMapping("/comment/delete")
+    @RequestMapping(value = "/comment/delete", method = RequestMethod.GET)
     @ResponseBody
     public String deleteComment(@RequestParam("commentId") int commentId){
         User user = hostHolder.getUser();

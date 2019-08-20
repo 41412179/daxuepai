@@ -80,5 +80,4 @@ public class IndexController {
         result.setMsg("发帖成功");
         return JSON.toJSONString(result);
     }
-
 }

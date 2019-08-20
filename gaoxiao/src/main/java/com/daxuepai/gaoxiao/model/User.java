@@ -77,4 +77,18 @@ public class User {
     public void setTicketStatus(int ticketStatus) {
         this.ticketStatus = ticketStatus;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", phone='" + phone + '\'' +
+                ", username='" + username + '\'' +
+                ", school=" + school +
+                ", headurl='" + headurl + '\'' +
+                ", ticket='" + ticket + '\'' +
+                ", ticketTimeout=" + ticketTimeout +
+                ", ticketStatus=" + ticketStatus +
+                '}';
+    }
 }

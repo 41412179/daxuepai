@@ -17,4 +17,7 @@ public interface UserDAO {
 
     @Select("select * from user where ticket = #{ticket}")
     User selectByTicket(String ticket);
+
+    @Select("select id from user where phone = #{phone}")
+    int selectByPhone(String phone);
 }

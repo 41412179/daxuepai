@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.ServletResponse;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,22 +46,9 @@ public class LoginController {
         //前段校验phone
         Result result = new Result();
         String code = String.valueOf(random.nextInt(99999));
-        ZhenziSmsClient client = new ZhenziSmsClient(apiUrl,appId,appSecret);
+
+        //把短信验证码插入
         int id = -1;
-        try {
-            logger.info("phone = " + phone + "; code: " + code);
-            String codeResult = client.send(phone,"大学派:你的验证码是:" + code + ",该验证码有效期5分钟，消息来自中国最大的高校论坛");
-            JSONObject json = JSONObject.parseObject(codeResult);
-            if (json.getIntValue("code")!=0){//发送短信失败
-                result.setStatus(ResultStatus.Failed);
-                return JSONObject.toJSONString(result);
-            }
-
-        } catch (Exception e) {
-            logger.error("榛子云发送短信失败！");
-            e.printStackTrace();
-        }
-
         Code generatedCode = new Code();
         generatedCode.setPhone(phone);
         generatedCode.setCode(code);
@@ -74,8 +62,30 @@ public class LoginController {
             e.printStackTrace();
             logger.error("插入短信验证码出错");
             result.setStatus(ResultStatus.Failed);
+            result.setMsg("服务器生成验证码出错");
             return JSON.toJSONString(result);
         }
+
+
+        ZhenziSmsClient client = new ZhenziSmsClient(apiUrl,appId,appSecret);
+        try {
+            logger.info("phone = " + phone + "; code: " + code);
+            String codeResult = client.send(phone,"大学派:你的验证码是:" + code + ",该验证码有效期5分钟，消息来自中国最大的高校论坛");
+            JSONObject json = JSONObject.parseObject(codeResult);
+            if (json.getIntValue("code")!=0){//发送短信失败
+                result.setStatus(ResultStatus.Failed);
+                result.setMsg("发送短信失败");
+                logger.error("发送短信失败");
+                return JSONObject.toJSONString(result);
+            }
+        } catch (Exception e) {
+            logger.error("榛子云发送短信失败！");
+            result.setStatus(ResultStatus.Failed);
+            result.setMsg("发送短信失败");
+            e.printStackTrace();
+            return JSONObject.toJSONString(result);
+        }
+
         result.setStatus(ResultStatus.Ok);
         HashMap<String,Integer> map = new HashMap<>();
         map.put("id", id);
@@ -86,9 +96,10 @@ public class LoginController {
     @Autowired
     UserService userService;
 
-    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    @RequestMapping(value = "/register",method = RequestMethod.GET)
     @ResponseBody
-    public String register(@RequestParam("phone") String phone,
+    public String register(HttpServletResponse response,
+                           @RequestParam("phone") String phone,
                            @RequestParam("code") int code,
                            @RequestParam("school") int schoolId,
                            @RequestParam("username") String username){
@@ -103,6 +114,13 @@ public class LoginController {
 
         boolean success = checkCode(phone, code);
         if(success) {
+            boolean hasRegister = checkPhone(phone);
+            if(hasRegister){
+                logger.error("注册失败：" + phone + "已经被注册了");
+                result.setMsg("该手机号已经被注册");
+                result.setStatus(ResultStatus.Failed);
+                return JSON.toJSONString(result);
+            }
             User user = new User();
             user.setPhone(phone);
             user.setSchool(schoolId);
@@ -117,14 +135,45 @@ public class LoginController {
                 result.setMsg("注册失败：创建用户失败");
                 return JSON.toJSONString(result);
             }
+            //注册完成后进行登录
+            String ticket = UUID.randomUUID().toString().replaceAll("-", "");
+            Cookie cookie = new Cookie("ticket", ticket);
+            cookie.setMaxAge(3600*24*5);
+            cookie.setPath("/");
+            response.addCookie(cookie);
+            User u = new User();
+            u.setTicket(ticket);
+            Date now = new Date();
+            Date timeOut = new Date(now.getTime() + 5*24*60*60*1000L);
+            u.setTicketTimeout(timeOut);
+            u.setTicketStatus(1);
+            u.setPhone(phone);
+            try {
+                userService.updateUser(u);
+            }catch (Exception e){
+                e.printStackTrace();
+                logger.error("注册后尝试登录失败");
+                result.setStatus(ResultStatus.Failed);
+                result.setMsg("注册后尝试登录失败");
+                return JSON.toJSONString(result);
+            }
             result.setStatus(ResultStatus.Ok);
-            result.setMsg("注册成功");
-
+            result.setMsg("注册并且登录成功");
         }else{
             result.setStatus(ResultStatus.Failed);
-            result.setMsg("验证码校验未通过");
+            result.setMsg("验证码填写错误");
+            logger.error("验证码填写错误");
         }
         return JSON.toJSONString(result);
+    }
+
+    private boolean checkPhone(String phone) {
+        int id = userService.selectByPhone(phone);
+        if(id > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 
     private boolean checkCode(String phone, int code) {
@@ -151,10 +200,14 @@ public class LoginController {
                         HttpServletResponse response){
         Result result = new Result();
         User u = hostHolder.getUser();
+
         if(u != null){
+            logger.info("当前用户 ： " + u.toString());
             result.setStatus(ResultStatus.Failed);
             result.setMsg("当前在线账户："+u.getUsername()+" 请退出后再登录");
             return JSON.toJSONString(result);
+        }else {
+            logger.info("当前没有用户登录");
         }
 
 
@@ -173,7 +226,7 @@ public class LoginController {
             User user = new User();
             user.setTicket(ticket);
             Date now = new Date();
-            Date timeOut = new Date(now.getTime() + 50000);
+            Date timeOut = new Date(now.getTime() + 5*24*60*60*1000L);
             user.setTicketTimeout(timeOut);
             user.setTicketStatus(1);
             user.setPhone(phone);
@@ -187,10 +240,11 @@ public class LoginController {
                 return JSON.toJSONString(result);
             }
             result.setStatus(ResultStatus.Ok);
+            result.setMsg("登录成功");
             return JSON.toJSONString(result);
         }else{
             result.setStatus(ResultStatus.Failed);
-            result.setMsg("验证码校验失败");
+            result.setMsg("验证码填写错误");
             return JSON.toJSONString(result);
         }
     }

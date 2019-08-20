@@ -22,4 +22,8 @@ public class UserService {
     public User selectByTicket(String ticket) {
         return userDAO.selectByTicket(ticket);
     }
+
+    public int selectByPhone(String phone) {
+        return userDAO.selectByPhone(phone);
+    }
 }

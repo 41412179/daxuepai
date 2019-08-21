@@ -12,8 +12,9 @@ public class LikeService {
     @Autowired
     LikeDAO likeDAO;
 
-    public int like(int userId, int postId) {
-        return likeDAO.select(userId, postId);
+    public Integer like(int userId, int postId) {
+        Integer ret = likeDAO.select(userId, postId);
+        return ret != null  ? ret: -1;
     }
 
     public void delete(int id) {

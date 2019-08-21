@@ -36,17 +36,28 @@ public class IndexController {
     @ResponseBody
     public String getAllList(@RequestParam("schoolId") int schoolId,
                              @RequestParam("page") int pageNum){
-        List<Post> posts = null;
-        int row = (pageNum -1) * 10;
-        int count = 10;
-        if(schoolId == 0) {
-            posts = postService.selectAllList(row, count);
-        }else{
-            posts = postService.selectAllListBySchoolId(row,count, schoolId);
-        }
 
-        if(posts != null && posts.size() > 0){
-            posts = filterService.filter(posts);
+        List<Post> posts = null;
+        try {
+
+            int row = (pageNum - 1) * 10;
+            int count = 10;
+            if (schoolId == 0) {
+                posts = postService.selectAllList(row, count);
+            } else {
+                posts = postService.selectAllListBySchoolId(row, count, schoolId);
+            }
+
+            if (posts != null && posts.size() > 0) {
+                posts = filterService.filter(posts);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            logger.error("获取帖子列表出错");
+            Result result = new Result();
+            result.setStatus(ResultStatus.Failed);
+            result.setMsg("您的页面走丢了，请联系管理员");
+            return JSON.toJSONString(result);
         }
         return JSON.toJSONString(posts);
     }
@@ -61,6 +72,7 @@ public class IndexController {
         if(user == null){
             result.setStatus(ResultStatus.Failed);
             result.setMsg("用户未登录");
+            return JSON.toJSONString(result);
         }
         int uid = user.getId();
         Date createTime = new Date();

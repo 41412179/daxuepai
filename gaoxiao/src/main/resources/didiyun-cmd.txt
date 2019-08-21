@@ -1,0 +1,4 @@
+cd /home/dc2-user/daxuepai-project/daxuepai/gaoxiao
+git pull
+ps aux | grep spring | xargs kill -9
+mvn org.springframework.boot:spring-boot-maven-plugin:run

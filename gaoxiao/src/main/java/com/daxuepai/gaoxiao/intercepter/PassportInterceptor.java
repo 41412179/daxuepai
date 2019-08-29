@@ -52,7 +52,7 @@ public class PassportInterceptor implements HandlerInterceptor {
                 hostHolder.setUser(user);
             }
         }else{
-            logger.info("当前客户端未保存ticket");
+            logger.info("客户端本次请求未携带ticket");
         }
         return true;
     }

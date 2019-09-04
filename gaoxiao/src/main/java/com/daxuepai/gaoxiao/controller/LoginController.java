@@ -6,6 +6,8 @@ import com.daxuepai.gaoxiao.exception.ServiceException;
 import com.daxuepai.gaoxiao.model.*;
 import com.daxuepai.gaoxiao.service.CodeService;
 import com.daxuepai.gaoxiao.service.UserService;
+import com.daxuepai.gaoxiao.service.VerificationCodeService;
+import com.daxuepai.gaoxiao.util.IPUtils;
 import com.daxuepai.gaoxiao.util.StatusCode;
 import com.zhenzi.sms.ZhenziSmsClient;
 import org.slf4j.Logger;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.HashMap;
@@ -39,13 +42,29 @@ public class LoginController {
     @Autowired
     HostHolder hostHolder;
 
+    @Autowired
+    VerificationCodeService verificationCodeService;
+
+
     @RequestMapping(value = "/getcode",method = RequestMethod.GET)
     @ResponseBody
-    public Result getcode(@RequestParam("phone") String phone) throws Exception{
+    public Result getcode(HttpServletRequest request,
+                          @RequestParam("phone") String phone) throws Exception{
+        String ip = IPUtils.getIpAddress(request);
+        int userId = 0;
+        User user = hostHolder.getUser();
+        if(user != null){
+            userId = user.getId();
+        }
+        VerificationCodeRecord record = new VerificationCodeRecord();
+        record.setDate(new Date());
+        record.setIp(ip);
+        record.setPhone(phone);
+        record.setUserId(userId);
+        verificationCodeService.record(record);
         //前段校验phone
         Result result = new Result();
         String code = String.valueOf(random.nextInt(99999));
-
         //把短信验证码插入
         int id = -1;
         Code generatedCode = new Code();

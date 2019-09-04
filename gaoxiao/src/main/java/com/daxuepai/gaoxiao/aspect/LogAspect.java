@@ -2,8 +2,10 @@ package com.daxuepai.gaoxiao.aspect;
 
 
 import com.daxuepai.gaoxiao.model.HostHolder;
+import com.daxuepai.gaoxiao.model.IPRecord;
 import com.daxuepai.gaoxiao.model.Monitor;
 import com.daxuepai.gaoxiao.model.User;
+import com.daxuepai.gaoxiao.service.IPRecordService;
 import com.daxuepai.gaoxiao.service.MonitorService;
 import com.daxuepai.gaoxiao.util.StatusCode;
 import org.aspectj.lang.JoinPoint;
@@ -35,6 +37,9 @@ public class LogAspect {
 
     @Autowired
     MonitorService monitorService;
+
+    @Autowired
+    IPRecordService ipRecordService;
 
 
     @Pointcut("execution(public * com.daxuepai.gaoxiao.controller..*.*(..))")
@@ -79,6 +84,45 @@ public class LogAspect {
         }
         return object;
     }
+
+    @Around("execution(public * com.daxuepai.gaoxiao.controller..*.*(..))")
+    public Object countIpRecord(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        String ip = getIpAddress(request);
+        Date now = new Date();
+        User user = hostHolder.getUser();
+        int userId = 0
+        if(user != null){
+            userId = user.getId();
+        }
+        IPRecord ipRecord = new IPRecord();
+        ipRecord.setDate(now);
+        ipRecord.setIp(ip);
+        ipRecord.setUserId(userId);
+        ipRecordService.recordIp(ipRecord);
+        Object object = proceedingJoinPoint.proceed();
+        return object;
+    }
+
+    public static String getIpAddress(HttpServletRequest request) {
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        if (ip.contains(",")) {
+            return ip.split(",")[0];
+        } else {
+            return ip;
+        }
+    }
+
 
     public static StringBuilder getAllRequestParams(HttpServletRequest request) {
         StringBuilder sb = new StringBuilder("[ ");

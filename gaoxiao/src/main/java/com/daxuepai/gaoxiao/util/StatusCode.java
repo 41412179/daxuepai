@@ -19,7 +19,6 @@ public enum StatusCode {
     LOGIN_REPEAT(803, "不要重复登录"),
     dont_need_exit(804, "没有用户登录，不需要退出"),
     exit_failed(805, "退出失败"),
-
     ;
 
 

@@ -128,9 +128,8 @@ public class LoginController {
             } catch (Exception e) {
                 e.printStackTrace();
                 logger.error("用户注册失败！");
-                result.setStatus(ResultStatus.Failed);
-                result.setMsg("注册失败：创建用户失败");
-                return JSON.toJSONString(result);
+                result = new Result(ErrorCode.REGISTER_FAILED);
+                return result;
             }
             //注册完成后进行登录
             String ticket = UUID.randomUUID().toString().replaceAll("-", "");
@@ -150,18 +149,17 @@ public class LoginController {
             }catch (Exception e){
                 e.printStackTrace();
                 logger.error("注册后尝试登录失败");
-                result.setStatus(ResultStatus.Failed);
-                result.setMsg("注册后尝试登录失败");
-                return JSON.toJSONString(result);
+                result = new Result(ErrorCode.LOGIN_FAILED);
+                return result;
             }
-            result.setStatus(ResultStatus.Ok);
-            result.setMsg("注册并且登录成功");
+            result = new Result(ErrorCode.SUCCESS, "注册并且登录成功");
         }else{
-            result.setStatus(ResultStatus.Failed);
-            result.setMsg("验证码填写错误");
+            result = new Result(ErrorCode.SMS_ERROR);
             logger.error("验证码填写错误");
+            return result;
         }
-        return JSON.toJSONString(result);
+        result = new Result(ErrorCode.SUCCESS);
+        return result;
     }
 
     private boolean checkPhone(String phone) {
@@ -191,7 +189,7 @@ public class LoginController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ResponseBody
-    public String login(@RequestParam("phone") String phone,
+    public Result login(@RequestParam("phone") String phone,
                         @RequestParam("code") String code,
                         @RequestParam(value = "isremember", defaultValue = "false") boolean isremember,
                         HttpServletResponse response){
@@ -200,13 +198,9 @@ public class LoginController {
 
         if(u != null){
             logger.info("当前用户 ： " + u.toString());
-            result.setStatus(ResultStatus.Failed);
-            result.setMsg("当前在线账户："+u.getUsername()+" 请退出后再登录");
-            return JSON.toJSONString(result);
-        }else {
-            logger.info("当前没有用户登录");
+            result = new Result(ErrorCode.LOGIN_REPEAT);
+            return result;
         }
-
 
         boolean isSuccess = checkCode(phone,Integer.valueOf(code));
         if(isSuccess){
@@ -232,29 +226,25 @@ public class LoginController {
             }catch (Exception e){
                 e.printStackTrace();
                 logger.error("登录失败");
-                result.setStatus(ResultStatus.Failed);
-                result.setMsg("登录失败");
-                return JSON.toJSONString(result);
+                result = new Result(ErrorCode.LOGIN_FAILED);
+                return result;
             }
-            result.setStatus(ResultStatus.Ok);
-            result.setMsg("登录成功");
-            return JSON.toJSONString(result);
+            result = new Result(ErrorCode.SUCCESS);
+            return result;
         }else{
-            result.setStatus(ResultStatus.Failed);
-            result.setMsg("验证码填写错误");
-            return JSON.toJSONString(result);
+            result = new Result(ErrorCode.SMS_ERROR);
+            return result;
         }
     }
 
     @RequestMapping(value = "/logout", method = RequestMethod.GET)
     @ResponseBody
-    public String logout(){
+    public Result logout(){
         Result result = new Result();
         User u = hostHolder.getUser();
         if(u == null){
-            result.setStatus(ResultStatus.Ok);
-            result.setMsg("当前没有用户登录，不需要退出");
-            return JSON.toJSONString(result);
+            result = new Result(ErrorCode.dont_need_exit);
+            return result;
         }
         User user = new User();
         user.setTicket(null);
@@ -266,11 +256,10 @@ public class LoginController {
         }catch (Exception e){
             e.printStackTrace();
             logger.error("退出失败！");
-            result.setStatus(ResultStatus.Failed);
-            return JSON.toJSONString(result);
+            result = new Result(ErrorCode.exit_failed);
+            return result;
         }
-        result.setStatus(ResultStatus.Ok);
-        result.setMsg("退出成功");
-        return JSON.toJSONString(result);
+        result = new Result(ErrorCode.SUCCESS);
+        return result;
     }
 }

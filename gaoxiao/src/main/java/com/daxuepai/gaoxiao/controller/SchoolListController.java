@@ -5,6 +5,7 @@ import com.daxuepai.gaoxiao.model.Result;
 import com.daxuepai.gaoxiao.model.ResultStatus;
 import com.daxuepai.gaoxiao.result.SchoolResult;
 import com.daxuepai.gaoxiao.service.SchoolService;
+import com.daxuepai.gaoxiao.util.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,17 +23,18 @@ public class SchoolListController {
 
     @RequestMapping(value = "/school/list", method = RequestMethod.GET)
     @ResponseBody
-    public String getSchoolList(){
-        Result result = new Result();
+    public Result getSchoolList(){
+        Result result = null;
         List<SchoolResult> results;
         try {
             results = schoolService.getList();
         }catch (Exception e){
             e.printStackTrace();
-            result.setStatus(ResultStatus.Failed);
-            result.setMsg("获得列表失败");
-            return JSON.toJSONString(result);
+            result = new Result(ErrorCode.GET_SCHOOL_LIST_FAILED);
+            return result;
         }
-        return JSON.toJSONString(results);
+        result = new Result(ErrorCode.SUCCESS);
+        result.setData("schoolList", results);
+        return result;
     }
 }

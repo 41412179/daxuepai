@@ -5,6 +5,7 @@ import com.daxuepai.gaoxiao.model.HostHolder;
 import com.daxuepai.gaoxiao.model.Result;
 import com.daxuepai.gaoxiao.model.ResultStatus;
 import com.daxuepai.gaoxiao.service.LikeService;
+import com.daxuepai.gaoxiao.util.ErrorCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,9 +29,9 @@ public class LikeController {
 
     @RequestMapping(value = "/post/like", method = RequestMethod.GET)
     @ResponseBody
-    public String likePost(@RequestParam("postId") int postId){
+    public Result likePost(@RequestParam("postId") int postId) {
         Result result = new Result();
-        if(hostHolder.getUser() != null) {
+        if (hostHolder.getUser() != null) {
             int userId = hostHolder.getUser().getId();
             synchronized (lock) {
                 int likeId = likeService.like(userId, postId);
@@ -40,12 +41,10 @@ public class LikeController {
                     likeService.insert(userId, postId, new Date());
                 }
             }
-            result.setStatus(ResultStatus.Ok);
-            result.setMsg("成功");
-        }else {
-            result.setStatus(ResultStatus.Failed);
-            result.setMsg("用户未登录，请先登录");
+            result = new Result(ErrorCode.SUCCESS);
+        } else {
+            result = new Result(ErrorCode.USER_NOT_LOGIN);
         }
-        return JSON.toJSONString(result);
+        return result;
     }
 }

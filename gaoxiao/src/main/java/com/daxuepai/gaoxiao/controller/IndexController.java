@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSON;
 import com.daxuepai.gaoxiao.model.*;
 import com.daxuepai.gaoxiao.service.FilterService;
 import com.daxuepai.gaoxiao.service.PostService;
+import com.daxuepai.gaoxiao.util.ErrorCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,9 +35,9 @@ public class IndexController {
     //snnu :3761
     @RequestMapping(value = "/all/list", method= RequestMethod.GET)
     @ResponseBody
-    public String getAllList(@RequestParam("schoolId") int schoolId,
+    public Result getAllList(@RequestParam("schoolId") int schoolId,
                              @RequestParam("page") int pageNum){
-
+        Result result = null;
         List<Post> posts = null;
         try {
 
@@ -54,25 +55,24 @@ public class IndexController {
         }catch (Exception e){
             e.printStackTrace();
             logger.error("获取帖子列表出错");
-            Result result = new Result();
-            result.setStatus(ResultStatus.Failed);
-            result.setMsg("您的页面走丢了，请联系管理员");
-            return JSON.toJSONString(result);
+            result = new Result(ErrorCode.SERVER_BUSY, "获取帖子失败");
+            return result;
         }
-        return JSON.toJSONString(posts);
+        result = new Result(ErrorCode.SUCCESS);
+        result.setData("posts", posts);
+        return result;
     }
 
     @RequestMapping(value = "/post/add", method = RequestMethod.GET)
     @ResponseBody
-    public String addPost(@RequestParam("title") String title,
+    public Result addPost(@RequestParam("title") String title,
                           @RequestParam("type") String type,
                           @RequestParam("content") String content){
         Result result = new Result();
         User user = hostHolder.getUser();
         if(user == null){
-            result.setStatus(ResultStatus.Failed);
-            result.setMsg("用户未登录");
-            return JSON.toJSONString(result);
+            result = new Result(ErrorCode.USER_NOT_LOGIN);
+            return result;
         }
         int uid = user.getId();
         Date createTime = new Date();
@@ -84,12 +84,10 @@ public class IndexController {
         }catch (Exception e){
             e.printStackTrace();
             logger.error("发帖失败");
-            result.setStatus(ResultStatus.Failed);
-            result.setMsg("发帖失败");
-            return JSON.toJSONString(result);
+            result = new Result(ErrorCode.SEND_POST_FAILED);
+            return result;
         }
-        result.setStatus(ResultStatus.Ok);
-        result.setMsg("发帖成功");
-        return JSON.toJSONString(result);
+        result = new Result(ErrorCode.SUCCESS);
+        return result;
     }
 }

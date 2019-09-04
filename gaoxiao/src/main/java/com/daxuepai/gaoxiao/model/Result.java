@@ -8,7 +8,7 @@ import java.util.Map;
 public class Result {
     int code;
     String msg;
-    Map<String, String> data = new HashMap<>();
+    Map<Object, Object> data = new HashMap<>();
 
     public Result() {
     }
@@ -21,6 +21,11 @@ public class Result {
     public Result(ErrorCode errorCode){
         this.code = errorCode.getCode();
         this.msg = errorCode.getText();
+    }
+
+    public Result(ErrorCode errorCode, String msg){
+        this.code = errorCode.getCode();
+        this.msg = msg;
     }
 
     public int getCode() {
@@ -39,12 +44,12 @@ public class Result {
         this.msg = msg;
     }
 
-    public Map<String, String> getData() {
+    public Map<Object, Object> getData() {
         return data;
     }
 
-    public void setData(Map<String, String> data) {
-        this.data = data;
+    public void setData(Object key, Object val) {
+        data.put(key, val);
     }
 
     @Override

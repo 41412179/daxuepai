@@ -2,7 +2,8 @@ package com.daxuepai.gaoxiao.controller;
 
 
 import com.daxuepai.gaoxiao.model.*;
-import com.daxuepai.gaoxiao.service.FilterService;
+import com.daxuepai.gaoxiao.service.FilterSensitiveWords;
+import com.daxuepai.gaoxiao.service.TiebaFilterService;
 import com.daxuepai.gaoxiao.service.PostService;
 import com.daxuepai.gaoxiao.util.StatusCode;
 import org.slf4j.Logger;
@@ -25,7 +26,10 @@ public class IndexController {
     PostService postService;
 
     @Autowired
-    FilterService filterService;
+    TiebaFilterService tiebaFilterService;
+
+    @Autowired
+    FilterSensitiveWords filterSensitiveWords;
 
     @Autowired
     HostHolder hostHolder;
@@ -48,7 +52,7 @@ public class IndexController {
             }
 
             if (posts != null && posts.size() > 0) {
-                posts = filterService.filter(posts);
+                posts = tiebaFilterService.filter(posts);
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -66,6 +70,8 @@ public class IndexController {
     public Result addPost(@RequestParam("title") String title,
                           @RequestParam("type") String type,
                           @RequestParam("content") String content){
+        content = filterSensitiveWords.filter(content);
+
         Result result = new Result();
         User user = hostHolder.getUser();
         if(user == null){

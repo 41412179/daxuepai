@@ -5,6 +5,7 @@ import com.daxuepai.gaoxiao.model.HostHolder;
 import com.daxuepai.gaoxiao.model.Result;
 import com.daxuepai.gaoxiao.model.User;
 import com.daxuepai.gaoxiao.service.CommentService;
+import com.daxuepai.gaoxiao.service.FilterSensitiveWords;
 import com.daxuepai.gaoxiao.util.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,13 +24,16 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    FilterSensitiveWords filterSensitiveWords;
+
 
     @RequestMapping(value = "/post/comment/add",method = RequestMethod.GET)
     @ResponseBody
     public Result comment(@RequestParam("postId") int postId,
                           @RequestParam("content") String content){
         Result result = new Result();
-
+        content = filterSensitiveWords.filter(content);
         User user = hostHolder.getUser();
         if(user == null){
             result = new Result(StatusCode.USER_NOT_LOGIN);
@@ -44,7 +48,7 @@ public class CommentController {
 
     @RequestMapping(value = "/comment/delete", method = RequestMethod.GET)
     @ResponseBody
-    public String deleteComment(@RequestParam("commentId") int commentId){
+    public Result deleteComment(@RequestParam("commentId") int commentId){
         User user = hostHolder.getUser();
         Result result = new Result();
         if(user == null){
@@ -57,6 +61,6 @@ public class CommentController {
             }
             result = new Result(StatusCode.SUCCESS);
         }
-        return JSON.toJSONString(result);
+        return result;
     }
 }

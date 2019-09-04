@@ -10,7 +10,6 @@ public class MonitorService {
     @Autowired
     MonitorDAO monitorDAO;
 
-
     public int insert(Monitor monitor) {
         return monitorDAO.insert(monitor);
     }

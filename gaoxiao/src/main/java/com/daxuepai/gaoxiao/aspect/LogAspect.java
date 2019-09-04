@@ -1,17 +1,26 @@
 package com.daxuepai.gaoxiao.aspect;
 
 
+import com.daxuepai.gaoxiao.model.HostHolder;
+import com.daxuepai.gaoxiao.model.Monitor;
+import com.daxuepai.gaoxiao.model.User;
+import com.daxuepai.gaoxiao.service.MonitorService;
+import com.daxuepai.gaoxiao.util.ErrorCode;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -20,6 +29,13 @@ import java.util.Set;
 @Component
 public class LogAspect {
     public static final Logger logger = LoggerFactory.getLogger(LogAspect.class);
+
+    @Autowired
+    HostHolder hostHolder;
+
+    @Autowired
+    MonitorService monitorService;
+
 
     @Pointcut("execution(public * com.daxuepai.gaoxiao.controller..*.*(..))")
     public void weblog(){}
@@ -33,6 +49,35 @@ public class LogAspect {
         request.getParameterMap();
         stringBuilder.append("params=" + getAllRequestParams(request));
         logger.info(stringBuilder.toString());
+    }
+
+    @Around("execution(public * com.daxuepai.gaoxiao.controller..*.*(..))")
+    public Object countFunctionTime(ProceedingJoinPoint proceedingJoinPoint) throws Throwable{
+        long startTime = System.currentTimeMillis();
+        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        HttpServletRequest request = attributes.getRequest();
+        Object object = proceedingJoinPoint.proceed();
+        long endTime = System.currentTimeMillis();
+        long takeTime = endTime - startTime;
+
+        Monitor monitor = new Monitor();
+        monitor.setCreateTime(new Date());
+        User user = hostHolder.getUser();
+        if(user != null){
+            monitor.setUserId(user.getId());
+        }
+        monitor.setTakeTime(takeTime);
+        monitor.setUrl(request.getRequestURL().toString());
+        try {
+            int count = monitorService.insert(monitor);
+            if (count == 0) {
+                logger.error(ErrorCode.INSERT_MONITOR_FAIL.toString());
+            }
+        }catch (Exception e){
+            logger.error(ErrorCode.INSERT_MONITOR_EXCEPTION.toString());
+            logger.error("", e);
+        }
+        return object;
     }
 
     public static StringBuilder getAllRequestParams(HttpServletRequest request) {

@@ -2,9 +2,11 @@ package com.daxuepai.gaoxiao.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.daxuepai.gaoxiao.exception.ServiceException;
 import com.daxuepai.gaoxiao.model.*;
 import com.daxuepai.gaoxiao.service.CodeService;
 import com.daxuepai.gaoxiao.service.UserService;
+import com.daxuepai.gaoxiao.util.ErrorCode;
 import com.zhenzi.sms.ZhenziSmsClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +44,7 @@ public class LoginController {
 
     @RequestMapping(value = "/getcode",method = RequestMethod.GET)
     @ResponseBody
-    public String getcode(@RequestParam("phone") String phone){
+    public Result getcode(@RequestParam("phone") String phone) throws Exception{
         //前段校验phone
         Result result = new Result();
         String code = String.valueOf(random.nextInt(99999));
@@ -59,11 +61,9 @@ public class LoginController {
         try {
             id = codeService.insertCode(generatedCode);
         }catch (Exception e){
-            e.printStackTrace();
-            logger.error("插入短信验证码出错");
-            result.setStatus(ResultStatus.Failed);
-            result.setMsg("服务器生成验证码出错");
-            return JSON.toJSONString(result);
+            logger.error("", e);
+            logger.error(ErrorCode.INSERT_SMS_FAILED.toString());
+            throw new ServiceException(ErrorCode.SERVER_BUSY.getCode());
         }
 
 
@@ -73,24 +73,22 @@ public class LoginController {
             String codeResult = client.send(phone,"大学派:你的验证码是:" + code + ",该验证码有效期5分钟，消息来自中国最大的高校论坛");
             JSONObject json = JSONObject.parseObject(codeResult);
             if (json.getIntValue("code")!=0){//发送短信失败
-                result.setStatus(ResultStatus.Failed);
-                result.setMsg("发送短信失败");
-                logger.error("发送短信失败");
-                return JSONObject.toJSONString(result);
+                result = new Result(ErrorCode.SEND_SMS_FAILED);
+                logger.error(ErrorCode.SEND_SMS_FAILED.toString());
+                return result;
             }
         } catch (Exception e) {
-            logger.error("榛子云发送短信失败！");
-            result.setStatus(ResultStatus.Failed);
-            result.setMsg("发送短信失败");
-            e.printStackTrace();
-            return JSONObject.toJSONString(result);
+            logger.error(ErrorCode.SEND_SMS_FAILED.toString());
+            logger.error("", e);
+            result = new Result(ErrorCode.SEND_SMS_FAILED);
+            return result;
         }
 
-        result.setStatus(ResultStatus.Ok);
+        result = new Result(ErrorCode.SUCCESS);
         HashMap<String,Integer> map = new HashMap<>();
         map.put("id", id);
         result.setMsg(JSON.toJSONString(map));
-        return JSON.toJSONString(result);
+        return result;
     }
 
     @Autowired
@@ -98,7 +96,7 @@ public class LoginController {
 
     @RequestMapping(value = "/register",method = RequestMethod.GET)
     @ResponseBody
-    public String register(HttpServletResponse response,
+    public Result register(HttpServletResponse response,
                            @RequestParam("phone") String phone,
                            @RequestParam("code") int code,
                            @RequestParam("school") int schoolId,
@@ -107,9 +105,9 @@ public class LoginController {
 
         User user1 = hostHolder.getUser();
         if(user1 != null){
-            result.setStatus(ResultStatus.Failed);
-            result.setMsg("当前登录账户："+user1.getUsername() + " 请退出后再注册");
-            return JSON.toJSONString(result);
+            logger.error(ErrorCode.REGISTER_HAS_LOGIN.toString());
+            result = new Result(ErrorCode.REGISTER_HAS_LOGIN);
+            return result;
         }
 
         boolean success = checkCode(phone, code);
@@ -117,9 +115,8 @@ public class LoginController {
             boolean hasRegister = checkPhone(phone);
             if(hasRegister){
                 logger.error("注册失败：" + phone + "已经被注册了");
-                result.setMsg("该手机号已经被注册");
-                result.setStatus(ResultStatus.Failed);
-                return JSON.toJSONString(result);
+                result = new Result(ErrorCode.PHONE_HAS_REGISTER);
+                return result;
             }
             User user = new User();
             user.setPhone(phone);

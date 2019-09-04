@@ -1,68 +1,25 @@
-2019-08-29 17:51:24.533  INFO 14192 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Starting GaoxiaoApplication on DESKTOP-F5BNI3J with PID 14192 (C:\Users\welove\Desktop\jackguo\weiai-project\daxuepai\gaoxiao\target\classes started by welove in C:\Users\welove\Desktop\jackguo\weiai-project\daxuepai\gaoxiao)
-2019-08-29 17:51:24.536  INFO 14192 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : No active profile set, falling back to default profiles: default
-2019-08-29 17:51:24.566  INFO 14192 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2019-08-29 17:51:24.566  INFO 14192 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2019-08-29 17:51:25.924  INFO 14192 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$77333de8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-08-29 17:51:26.267  INFO 14192 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2019-08-29 17:51:26.289  INFO 14192 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-08-29 17:51:26.290  INFO 14192 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
-2019-08-29 17:51:26.432  INFO 14192 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-08-29 17:51:26.432  INFO 14192 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1863 ms
-2019-08-29 17:51:27.296  INFO 14192 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2019-08-29 17:51:27.379  INFO 14192 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
-2019-08-29 17:51:27.588  INFO 14192 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-08-29 17:51:27.612  INFO 14192 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2019-08-29 17:51:28.024  INFO 14192 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2019-08-29 17:51:28.046  INFO 14192 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2019-08-29 17:51:28.074  INFO 14192 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2019-08-29 17:51:28.206  INFO 14192 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2019-08-29 17:51:28.209  INFO 14192 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Started GaoxiaoApplication in 3.957 seconds (JVM running for 4.329)
-2019-08-29 18:17:26.589  INFO 10684 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Starting GaoxiaoApplication on DESKTOP-F5BNI3J with PID 10684 (C:\Users\welove\Desktop\jackguo\weiai-project\daxuepai\gaoxiao\target\classes started by welove in C:\Users\welove\Desktop\jackguo\weiai-project\daxuepai\gaoxiao)
-2019-08-29 18:17:26.591  INFO 10684 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : No active profile set, falling back to default profiles: default
-2019-08-29 18:17:26.623  INFO 10684 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2019-08-29 18:17:26.623  INFO 10684 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2019-08-29 18:17:27.964  INFO 10684 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$13e40e91] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-08-29 18:17:28.482  INFO 10684 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2019-08-29 18:17:28.504  INFO 10684 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-08-29 18:17:28.504  INFO 10684 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
-2019-08-29 18:17:28.587  INFO 10684 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-08-29 18:17:28.587  INFO 10684 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1963 ms
-2019-08-29 18:17:29.480  INFO 10684 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2019-08-29 18:17:29.562  INFO 10684 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
-2019-08-29 18:17:29.782  INFO 10684 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-08-29 18:17:29.810  INFO 10684 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2019-08-29 18:17:30.262  INFO 10684 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2019-08-29 18:17:30.279  INFO 10684 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2019-08-29 18:17:30.303  INFO 10684 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2019-08-29 18:17:30.425  INFO 10684 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2019-08-29 18:17:30.428  INFO 10684 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Started GaoxiaoApplication in 4.104 seconds (JVM running for 4.481)
-2019-08-29 18:18:19.919  INFO 10684 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-08-29 18:18:19.920  INFO 10684 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-08-29 18:18:19.930  INFO 10684 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
-2019-08-29 18:18:19.950  INFO 10684 --- [http-nio-80-exec-1] c.d.g.intercepter.PassportInterceptor    : 当前客户端未保存ticket
-2019-08-29 18:18:19.967  INFO 10684 --- [http-nio-80-exec-1] com.daxuepai.gaoxiao.aspect.LogAspect    : url=http://localhost/test,params=[  ]
-2019-08-29 18:27:06.182  INFO 17068 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Starting GaoxiaoApplication on DESKTOP-F5BNI3J with PID 17068 (C:\Users\welove\Desktop\jackguo\weiai-project\daxuepai\gaoxiao\target\classes started by welove in C:\Users\welove\Desktop\jackguo\weiai-project\daxuepai\gaoxiao)
-2019-08-29 18:27:06.185  INFO 17068 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : No active profile set, falling back to default profiles: default
-2019-08-29 18:27:06.216  INFO 17068 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
-2019-08-29 18:27:06.216  INFO 17068 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
-2019-08-29 18:27:07.646  INFO 17068 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7b73e4ab] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
-2019-08-29 18:27:08.156  INFO 17068 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
-2019-08-29 18:27:08.177  INFO 17068 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
-2019-08-29 18:27:08.178  INFO 17068 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
-2019-08-29 18:27:08.261  INFO 17068 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
-2019-08-29 18:27:08.261  INFO 17068 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2044 ms
-2019-08-29 18:27:09.193  INFO 17068 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
-2019-08-29 18:27:09.276  INFO 17068 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
-2019-08-29 18:27:09.482  INFO 17068 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
-2019-08-29 18:27:09.508  INFO 17068 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
-2019-08-29 18:27:09.944  INFO 17068 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
-2019-08-29 18:27:09.963  INFO 17068 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
-2019-08-29 18:27:09.987  INFO 17068 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
-2019-08-29 18:27:10.119  INFO 17068 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
-2019-08-29 18:27:10.122  INFO 17068 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Started GaoxiaoApplication in 4.232 seconds (JVM running for 4.604)
-2019-08-29 18:27:30.800  INFO 17068 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
-2019-08-29 18:27:30.800  INFO 17068 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
-2019-08-29 18:27:30.810  INFO 17068 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 9 ms
-2019-08-29 18:27:30.831  INFO 17068 --- [http-nio-80-exec-1] c.d.g.intercepter.PassportInterceptor    : 客户端本次请求未携带ticket
-2019-08-29 18:27:30.840  WARN 17068 --- [http-nio-80-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter 'name' is not present]
-2019-08-29 18:27:30.851  INFO 17068 --- [http-nio-80-exec-1] c.d.g.intercepter.PassportInterceptor    : 客户端本次请求未携带ticket
+2019-08-30 10:03:52.361  INFO 16684 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Starting GaoxiaoApplication on DESKTOP-F5BNI3J with PID 16684 (C:\Users\welove\Desktop\jackguo\weiai-project\daxuepai\gaoxiao\target\classes started by welove in C:\Users\welove\Desktop\jackguo\weiai-project\daxuepai\gaoxiao)
+2019-08-30 10:03:52.367  INFO 16684 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : No active profile set, falling back to default profiles: default
+2019-08-30 10:03:52.396  INFO 16684 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-08-30 10:03:52.397  INFO 16684 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-08-30 10:03:53.751  INFO 16684 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$233eb729] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-08-30 10:03:54.291  INFO 16684 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2019-08-30 10:03:54.313  INFO 16684 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-08-30 10:03:54.313  INFO 16684 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-08-30 10:03:54.400  INFO 16684 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-08-30 10:03:54.401  INFO 16684 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2004 ms
+2019-08-30 10:03:55.341  INFO 16684 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-08-30 10:03:55.426  INFO 16684 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-08-30 10:03:55.655  INFO 16684 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-08-30 10:03:55.683  INFO 16684 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-08-30 10:03:56.160  INFO 16684 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-08-30 10:03:56.180  INFO 16684 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-08-30 10:03:56.204  INFO 16684 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-08-30 10:03:56.328  INFO 16684 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2019-08-30 10:03:56.331  INFO 16684 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Started GaoxiaoApplication in 4.236 seconds (JVM running for 4.606)
+2019-08-30 10:10:11.607  INFO 16684 --- [http-nio-80-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-08-30 10:10:11.608  INFO 16684 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-08-30 10:10:11.621  INFO 16684 --- [http-nio-80-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 12 ms
+2019-08-30 10:10:11.644  INFO 16684 --- [http-nio-80-exec-1] c.d.g.intercepter.PassportInterceptor    : 客户端本次请求未携带ticket
+2019-08-30 10:10:11.655  WARN 16684 --- [http-nio-80-exec-1] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter 'name' is not present]
+2019-08-30 10:10:11.666  INFO 16684 --- [http-nio-80-exec-1] c.d.g.intercepter.PassportInterceptor    : 客户端本次请求未携带ticket

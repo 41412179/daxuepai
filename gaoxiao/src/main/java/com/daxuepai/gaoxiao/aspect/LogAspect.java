@@ -92,7 +92,7 @@ public class LogAspect {
         String ip = getIpAddress(request);
         Date now = new Date();
         User user = hostHolder.getUser();
-        int userId = 0
+        int userId = 0;
         if(user != null){
             userId = user.getId();
         }

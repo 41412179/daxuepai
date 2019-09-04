@@ -5,7 +5,7 @@ import com.daxuepai.gaoxiao.model.HostHolder;
 import com.daxuepai.gaoxiao.model.Monitor;
 import com.daxuepai.gaoxiao.model.User;
 import com.daxuepai.gaoxiao.service.MonitorService;
-import com.daxuepai.gaoxiao.util.ErrorCode;
+import com.daxuepai.gaoxiao.util.StatusCode;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -71,10 +71,10 @@ public class LogAspect {
         try {
             int count = monitorService.insert(monitor);
             if (count == 0) {
-                logger.error(ErrorCode.INSERT_MONITOR_FAIL.toString());
+                logger.error(StatusCode.INSERT_MONITOR_FAIL.toString());
             }
         }catch (Exception e){
-            logger.error(ErrorCode.INSERT_MONITOR_EXCEPTION.toString());
+            logger.error(StatusCode.INSERT_MONITOR_EXCEPTION.toString());
             logger.error("", e);
         }
         return object;

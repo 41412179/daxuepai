@@ -1,11 +1,10 @@
 package com.daxuepai.gaoxiao.controller;
 
 
-import com.alibaba.fastjson.JSON;
 import com.daxuepai.gaoxiao.model.*;
 import com.daxuepai.gaoxiao.service.FilterService;
 import com.daxuepai.gaoxiao.service.PostService;
-import com.daxuepai.gaoxiao.util.ErrorCode;
+import com.daxuepai.gaoxiao.util.StatusCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Date;
 import java.util.List;
-import java.util.logging.Filter;
 
 @Controller
 public class IndexController {
@@ -55,10 +53,10 @@ public class IndexController {
         }catch (Exception e){
             e.printStackTrace();
             logger.error("获取帖子列表出错");
-            result = new Result(ErrorCode.SERVER_BUSY, "获取帖子失败");
+            result = new Result(StatusCode.SERVER_BUSY, "获取帖子失败");
             return result;
         }
-        result = new Result(ErrorCode.SUCCESS);
+        result = new Result(StatusCode.SUCCESS);
         result.setData("posts", posts);
         return result;
     }
@@ -71,7 +69,7 @@ public class IndexController {
         Result result = new Result();
         User user = hostHolder.getUser();
         if(user == null){
-            result = new Result(ErrorCode.USER_NOT_LOGIN);
+            result = new Result(StatusCode.USER_NOT_LOGIN);
             return result;
         }
         int uid = user.getId();
@@ -84,10 +82,10 @@ public class IndexController {
         }catch (Exception e){
             e.printStackTrace();
             logger.error("发帖失败");
-            result = new Result(ErrorCode.SEND_POST_FAILED);
+            result = new Result(StatusCode.SEND_POST_FAILED);
             return result;
         }
-        result = new Result(ErrorCode.SUCCESS);
+        result = new Result(StatusCode.SUCCESS);
         return result;
     }
 }

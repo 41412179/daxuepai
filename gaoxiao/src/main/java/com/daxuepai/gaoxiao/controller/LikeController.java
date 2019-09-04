@@ -1,11 +1,9 @@
 package com.daxuepai.gaoxiao.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.daxuepai.gaoxiao.model.HostHolder;
 import com.daxuepai.gaoxiao.model.Result;
-import com.daxuepai.gaoxiao.model.ResultStatus;
 import com.daxuepai.gaoxiao.service.LikeService;
-import com.daxuepai.gaoxiao.util.ErrorCode;
+import com.daxuepai.gaoxiao.util.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,9 +39,9 @@ public class LikeController {
                     likeService.insert(userId, postId, new Date());
                 }
             }
-            result = new Result(ErrorCode.SUCCESS);
+            result = new Result(StatusCode.SUCCESS);
         } else {
-            result = new Result(ErrorCode.USER_NOT_LOGIN);
+            result = new Result(StatusCode.USER_NOT_LOGIN);
         }
         return result;
     }

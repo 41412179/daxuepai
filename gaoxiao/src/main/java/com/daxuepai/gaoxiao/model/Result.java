@@ -1,6 +1,6 @@
 package com.daxuepai.gaoxiao.model;
 
-import com.daxuepai.gaoxiao.util.ErrorCode;
+import com.daxuepai.gaoxiao.util.StatusCode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,13 +18,13 @@ public class Result {
         this.msg = msg;
     }
 
-    public Result(ErrorCode errorCode){
-        this.code = errorCode.getCode();
-        this.msg = errorCode.getText();
+    public Result(StatusCode statusCode){
+        this.code = statusCode.getCode();
+        this.msg = statusCode.getText();
     }
 
-    public Result(ErrorCode errorCode, String msg){
-        this.code = errorCode.getCode();
+    public Result(StatusCode statusCode, String msg){
+        this.code = statusCode.getCode();
         this.msg = msg;
     }
 

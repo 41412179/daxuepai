@@ -10,7 +10,7 @@ public interface VerificationCodeDAO {
     @Insert("insert into phone_code_record (user_id, ip, date, phone) values(#{userId}, #{ip}, #{date}, #{phone})")
     int insert(VerificationCodeRecord record);
 
-    @Select("slect count(*) as count from phone_code_record where ip = #{ip}")
+    @Select("select count(*) as count from phone_code_record where ip = #{ip}")
     int countIP(String ip);
 
     @Select("select count(*) ad count from phone_code_record where phone = #{phone}")

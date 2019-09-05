@@ -49,7 +49,7 @@ public class LoginController {
     @RequestMapping(value = "/getcode",method = RequestMethod.GET)
     @ResponseBody
     public Result getcode(HttpServletRequest request,
-                          @RequestParam("phone") String phone) throws Exception{
+                          @RequestParam("phone") String phone){
 
         Result result = new Result();
         String ip = IPUtils.getIpAddress(request);
@@ -64,7 +64,14 @@ public class LoginController {
         record.setPhone(phone);
         record.setUserId(userId);
         verificationCodeService.record(record);
-        boolean isLimited = checkRequestCount(request, phone);
+        boolean isLimited = true;
+        try {
+             isLimited = checkRequestCount(request, phone);
+        }catch (Exception e){
+            logger.error("", e);
+            result = new Result(StatusCode.SERVER_BUSY);
+            return result;
+        }
         if(isLimited){
             result = new Result(StatusCode.requet_too_buzy);
             return result;
@@ -85,8 +92,10 @@ public class LoginController {
             id = codeService.insertCode(generatedCode);
         }catch (Exception e){
             logger.error("", e);
-            logger.error(StatusCode.INSERT_SMS_FAILED.toString());
-            throw new ServiceException(StatusCode.SERVER_BUSY.getCode());
+//            logger.error(StatusCode.INSERT_SMS_FAILED.toString());
+//            throw new ServiceException(StatusCode.SERVER_BUSY.getCode());
+            result = new Result(StatusCode.SERVER_BUSY);
+            return result;
         }
 
 
@@ -115,7 +124,7 @@ public class LoginController {
     }
 
     static int get_code_limit_count = 5;
-    private boolean checkRequestCount(HttpServletRequest request, String phone) {
+    private boolean checkRequestCount(HttpServletRequest request, String phone) throws ServiceException {
         String ip = IPUtils.getIpAddress(request);
         int ipCount = verificationCodeService.countIp(ip);
         int phoneCount = verificationCodeService.countPhone(phone);

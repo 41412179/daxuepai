@@ -1,5 +1,7 @@
 package com.daxuepai.gaoxiao.exception;
 
+import com.daxuepai.gaoxiao.util.StatusCode;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,6 +16,11 @@ public class ServiceException extends Exception{
     public ServiceException(int code, String msg) {
         this.code = code;
         this.msg = msg;
+    }
+
+    public ServiceException(StatusCode status){
+        this.code = status.getCode();
+        this.msg = status.getText();
     }
 
     public int getCode() {

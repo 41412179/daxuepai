@@ -13,6 +13,6 @@ public interface VerificationCodeDAO {
     @Select("select count(*) as count from phone_code_record where ip = #{ip}")
     int countIP(String ip);
 
-    @Select("select count(*) ad count from phone_code_record where phone = #{phone}")
+    @Select("select count(*) as count from phone_code_record where phone = #{phone}")
     int countPhone(String phone);
 }

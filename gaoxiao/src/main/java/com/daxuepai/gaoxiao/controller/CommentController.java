@@ -9,6 +9,7 @@ import com.daxuepai.gaoxiao.service.FilterSensitiveWords;
 import com.daxuepai.gaoxiao.util.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,6 +34,10 @@ public class CommentController {
     public Result comment(@RequestParam("postId") int postId,
                           @RequestParam("content") String content){
         Result result = new Result();
+        if(StringUtils.isEmpty(content)){
+            result = new Result(StatusCode.empty_content);
+            return result;
+        }
         content = filterSensitiveWords.filter(content);
         User user = hostHolder.getUser();
         if(user == null){

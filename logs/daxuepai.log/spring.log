@@ -1,0 +1,135 @@
+2019-09-05 14:27:31.692  INFO 22684 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Starting GaoxiaoApplication on DESKTOP-F5BNI3J with PID 22684 (C:\Users\welove\Desktop\jackguo\daxuepai\gaoxiao\target\classes started by welove in C:\Users\welove\Desktop\jackguo\daxuepai)
+2019-09-05 14:27:31.699  INFO 22684 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : No active profile set, falling back to default profiles: default
+2019-09-05 14:27:31.729  INFO 22684 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-05 14:27:31.730  INFO 22684 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-05 14:27:33.145  INFO 22684 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$b95a90be] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-05 14:27:33.510  INFO 22684 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2019-09-05 14:27:33.525  INFO 22684 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-05 14:27:33.526  INFO 22684 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-05 14:27:33.647  INFO 22684 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-05 14:27:33.648  INFO 22684 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1909 ms
+2019-09-05 14:27:34.698  INFO 22684 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-09-05 14:27:34.788  INFO 22684 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-05 14:27:34.967  INFO 22684 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-05 14:27:35.035  INFO 22684 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-05 14:27:35.469  INFO 22684 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-05 14:27:35.482  INFO 22684 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-05 14:27:35.505  INFO 22684 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-05 14:27:35.644  INFO 22684 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2019-09-05 14:27:35.647  INFO 22684 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Started GaoxiaoApplication in 4.349 seconds (JVM running for 4.958)
+2019-09-05 14:27:36.163  INFO 22684 --- [RMI TCP Connection(1)-192.168.10.211] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-09-05 14:27:36.247  INFO 22684 --- [RMI TCP Connection(3)-192.168.10.211] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-05 14:27:36.248  INFO 22684 --- [RMI TCP Connection(3)-192.168.10.211] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-05 14:27:36.258  INFO 22684 --- [RMI TCP Connection(3)-192.168.10.211] o.s.web.servlet.DispatcherServlet        : Completed initialization in 10 ms
+2019-09-05 14:27:36.394  INFO 22684 --- [RMI TCP Connection(1)-192.168.10.211] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-09-05 14:27:55.248  INFO 22684 --- [http-nio-80-exec-1] c.d.g.intercepter.PassportInterceptor    : 客户端本次请求未携带ticket
+2019-09-05 14:27:55.274 DEBUG 22684 --- [http-nio-80-exec-1] c.d.g.dao.IPRecordDAO.insertRecord       : ==>  Preparing: insert into user_daily_ip_records (user_id, ip, date)values(?, ?, ?) 
+2019-09-05 14:27:55.289 DEBUG 22684 --- [http-nio-80-exec-1] c.d.g.dao.IPRecordDAO.insertRecord       : ==> Parameters: 0(Integer), 0:0:0:0:0:0:0:1(String), 2019-09-05 14:27:55.257(Timestamp)
+2019-09-05 14:27:55.376 DEBUG 22684 --- [http-nio-80-exec-1] c.d.g.dao.IPRecordDAO.insertRecord       : <==    Updates: 1
+2019-09-05 14:27:55.377  INFO 22684 --- [http-nio-80-exec-1] com.daxuepai.gaoxiao.aspect.LogAspect    : url=http://localhost/test&params=[  ]
+2019-09-05 14:27:55.380 ERROR 22684 --- [http-nio-80-exec-1] c.d.gaoxiao.controller.AdviceController  : ErrorCode{code=401, text='请求缺少必需的参数'}
+2019-09-05 14:27:55.383 ERROR 22684 --- [http-nio-80-exec-1] c.d.gaoxiao.controller.AdviceController  : 
+
+org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter 'name' is not present
+	at org.springframework.web.method.annotation.RequestParamMethodArgumentResolver.handleMissingValue(RequestParamMethodArgumentResolver.java:202) ~[spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver.resolveArgument(AbstractNamedValueMethodArgumentResolver.java:113) ~[spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.method.support.HandlerMethodArgumentResolverComposite.resolveArgument(HandlerMethodArgumentResolverComposite.java:127) ~[spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.getMethodArgumentValues(InvocableHandlerMethod.java:167) ~[spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:134) ~[spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104) ~[spring-webmvc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:892) ~[spring-webmvc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:797) ~[spring-webmvc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1039) ~[spring-webmvc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:942) ~[spring-webmvc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1005) ~[spring-webmvc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:897) ~[spring-webmvc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:634) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:882) ~[spring-webmvc-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:741) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:231) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53) ~[tomcat-embed-websocket-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.springframework.boot.actuate.web.trace.servlet.HttpTraceFilter.doFilterInternal(HttpTraceFilter.java:88) ~[spring-boot-actuator-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118) [spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99) [spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118) [spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92) [spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118) [spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93) [spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118) [spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.filterAndRecordMetrics(WebMvcMetricsFilter.java:114) [spring-boot-actuator-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.boot.actuate.metrics.web.servlet.WebMvcMetricsFilter.doFilterInternal(WebMvcMetricsFilter.java:104) [spring-boot-actuator-2.1.7.RELEASE.jar:2.1.7.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118) [spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200) [spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:118) [spring-web-5.1.9.RELEASE.jar:5.1.9.RELEASE]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166) ~[tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:202) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:853) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1587) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149) [na:1.8.0_191]
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624) [na:1.8.0_191]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) [tomcat-embed-core-9.0.22.jar:9.0.22]
+	at java.lang.Thread.run(Thread.java:748) [na:1.8.0_191]
+
+2019-09-05 14:27:55.383 DEBUG 22684 --- [http-nio-80-exec-1] c.d.gaoxiao.dao.MonitorDAO.insert        : ==>  Preparing: insert into monitor (user_id, url, take_time, create_time)values(?, ?, ?, ?) 
+2019-09-05 14:27:55.384 DEBUG 22684 --- [http-nio-80-exec-1] c.d.gaoxiao.dao.MonitorDAO.insert        : ==> Parameters: 0(Integer), http://localhost/test(String), 127(Long), 2019-09-05 14:27:55.383(Timestamp)
+2019-09-05 14:27:55.400 DEBUG 22684 --- [http-nio-80-exec-1] c.d.gaoxiao.dao.MonitorDAO.insert        : <==    Updates: 1
+2019-09-05 14:27:55.417  WARN 22684 --- [http-nio-80-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter 'name' is not present]
+2019-09-05 14:29:59.030  INFO 21756 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Starting GaoxiaoApplication on DESKTOP-F5BNI3J with PID 21756 (C:\Users\welove\Desktop\jackguo\daxuepai\gaoxiao\target\classes started by welove in C:\Users\welove\Desktop\jackguo\daxuepai)
+2019-09-05 14:29:59.032  INFO 21756 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : No active profile set, falling back to default profiles: default
+2019-09-05 14:29:59.063  INFO 21756 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-09-05 14:29:59.063  INFO 21756 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-09-05 14:30:00.275  INFO 21756 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$3f63676] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-09-05 14:30:00.640  INFO 21756 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 80 (http)
+2019-09-05 14:30:00.655  INFO 21756 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-09-05 14:30:00.655  INFO 21756 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.22]
+2019-09-05 14:30:00.780  INFO 21756 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-09-05 14:30:00.780  INFO 21756 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1717 ms
+2019-09-05 14:30:01.624  INFO 21756 --- [restartedMain] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoint(s) beneath base path '/actuator'
+2019-09-05 14:30:01.696  INFO 21756 --- [restartedMain] pertySourcedRequestMappingHandlerMapping : Mapped URL path [/v2/api-docs] onto method [public org.springframework.http.ResponseEntity<springfox.documentation.spring.web.json.Json> springfox.documentation.swagger2.web.Swagger2Controller.getDocumentation(java.lang.String,javax.servlet.http.HttpServletRequest)]
+2019-09-05 14:30:01.874  INFO 21756 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-09-05 14:30:01.934  INFO 21756 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-09-05 14:30:02.347  INFO 21756 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Context refreshed
+2019-09-05 14:30:02.359  INFO 21756 --- [restartedMain] d.s.w.p.DocumentationPluginsBootstrapper : Found 1 custom documentation plugin(s)
+2019-09-05 14:30:02.380  INFO 21756 --- [restartedMain] s.d.s.w.s.ApiListingReferenceScanner     : Scanning for api listing references
+2019-09-05 14:30:02.506  INFO 21756 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 80 (http) with context path ''
+2019-09-05 14:30:02.509  INFO 21756 --- [restartedMain] com.daxuepai.gaoxiao.GaoxiaoApplication  : Started GaoxiaoApplication in 3.733 seconds (JVM running for 4.256)
+2019-09-05 14:30:02.992  INFO 21756 --- [RMI TCP Connection(1)-192.168.10.211] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2019-09-05 14:30:02.992  INFO 21756 --- [RMI TCP Connection(2)-192.168.10.211] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-09-05 14:30:02.992  INFO 21756 --- [RMI TCP Connection(2)-192.168.10.211] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-09-05 14:30:03.001  INFO 21756 --- [RMI TCP Connection(2)-192.168.10.211] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8 ms
+2019-09-05 14:30:03.251  INFO 21756 --- [RMI TCP Connection(1)-192.168.10.211] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2019-09-05 14:30:09.602  INFO 21756 --- [http-nio-80-exec-1] c.d.g.intercepter.PassportInterceptor    : 客户端本次请求未携带ticket
+2019-09-05 14:30:09.625 DEBUG 21756 --- [http-nio-80-exec-1] c.d.g.dao.IPRecordDAO.insertRecord       : ==>  Preparing: insert into user_daily_ip_records (user_id, ip, date)values(?, ?, ?) 
+2019-09-05 14:30:09.639 DEBUG 21756 --- [http-nio-80-exec-1] c.d.g.dao.IPRecordDAO.insertRecord       : ==> Parameters: 0(Integer), 0:0:0:0:0:0:0:1(String), 2019-09-05 14:30:09.611(Timestamp)
+2019-09-05 14:30:09.667 DEBUG 21756 --- [http-nio-80-exec-1] c.d.g.dao.IPRecordDAO.insertRecord       : <==    Updates: 1
+2019-09-05 14:30:09.668  INFO 21756 --- [http-nio-80-exec-1] com.daxuepai.gaoxiao.aspect.LogAspect    : url=http://localhost/test&params=[  ]
+2019-09-05 14:30:09.669 ERROR 21756 --- [http-nio-80-exec-1] c.d.gaoxiao.controller.AdviceController  : ErrorCode{code=401, text='请求缺少必需的参数'}
+2019-09-05 14:30:09.670 ERROR 21756 --- [http-nio-80-exec-1] c.d.gaoxiao.controller.AdviceController  : 
+2019-09-05 14:30:09.670 DEBUG 21756 --- [http-nio-80-exec-1] c.d.gaoxiao.dao.MonitorDAO.insert        : ==>  Preparing: insert into monitor (user_id, url, take_time, create_time)values(?, ?, ?, ?) 
+2019-09-05 14:30:09.671 DEBUG 21756 --- [http-nio-80-exec-1] c.d.gaoxiao.dao.MonitorDAO.insert        : ==> Parameters: 0(Integer), http://localhost/test(String), 60(Long), 2019-09-05 14:30:09.67(Timestamp)
+2019-09-05 14:30:09.686 DEBUG 21756 --- [http-nio-80-exec-1] c.d.gaoxiao.dao.MonitorDAO.insert        : <==    Updates: 1
+2019-09-05 14:30:09.701  WARN 21756 --- [http-nio-80-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.bind.MissingServletRequestParameterException: Required String parameter 'name' is not present]

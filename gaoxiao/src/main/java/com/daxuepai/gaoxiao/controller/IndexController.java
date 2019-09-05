@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,9 +71,15 @@ public class IndexController {
     public Result addPost(@RequestParam("title") String title,
                           @RequestParam("type") String type,
                           @RequestParam("content") String content){
+        Result result = new Result();
+        if(StringUtils.isEmpty(content)){
+            result = new Result(StatusCode.empty_content);
+            return result;
+        }
+
         content = filterSensitiveWords.filter(content);
 
-        Result result = new Result();
+
         User user = hostHolder.getUser();
         if(user == null){
             result = new Result(StatusCode.USER_NOT_LOGIN);

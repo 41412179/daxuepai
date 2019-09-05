@@ -15,4 +15,12 @@ public class VerificationCodeService {
     public void record(VerificationCodeRecord record) {
         verificationCodeDAO.insert(record);
     }
+
+    public int countIp(String ip) {
+        return verificationCodeDAO.countIP(ip);
+    }
+
+    public int countPhone(String phone) {
+        return verificationCodeDAO.countPhone(phone);
+    }
 }

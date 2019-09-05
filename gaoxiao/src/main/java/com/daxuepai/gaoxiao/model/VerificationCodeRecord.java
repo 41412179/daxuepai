@@ -8,17 +8,7 @@ public class VerificationCodeRecord {
     String ip;
     Date date;
     String phone;
-
-    @Override
-    public String toString() {
-        return "VerificationCodeRecord{" +
-                "id=" + id +
-                ", userId=" + userId +
-                ", ip='" + ip + '\'' +
-                ", date=" + date +
-                ", phone='" + phone + '\'' +
-                '}';
-    }
+    int isLimited;
 
     public int getId() {
         return id;
@@ -58,5 +48,25 @@ public class VerificationCodeRecord {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public int getIsLimited() {
+        return isLimited;
+    }
+
+    public void setIsLimited(int isLimited) {
+        this.isLimited = isLimited;
+    }
+
+    @Override
+    public String toString() {
+        return "VerificationCodeRecord{" +
+                "id=" + id +
+                ", userId=" + userId +
+                ", ip='" + ip + '\'' +
+                ", date=" + date +
+                ", phone='" + phone + '\'' +
+                ", isLimited=" + isLimited +
+                '}';
     }
 }

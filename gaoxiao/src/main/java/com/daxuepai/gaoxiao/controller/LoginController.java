@@ -50,6 +50,8 @@ public class LoginController {
     @ResponseBody
     public Result getcode(HttpServletRequest request,
                           @RequestParam("phone") String phone) throws Exception{
+
+        Result result = new Result();
         String ip = IPUtils.getIpAddress(request);
         int userId = 0;
         User user = hostHolder.getUser();
@@ -62,6 +64,12 @@ public class LoginController {
         record.setPhone(phone);
         record.setUserId(userId);
         verificationCodeService.record(record);
+        boolean isLimited = checkRequestCount(request, phone);
+        if(isLimited){
+            result = new Result(StatusCode.requet_too_buzy);
+            return result;
+        }
+
         //前段校验phone
         Result result = new Result();
         String code = String.valueOf(random.nextInt(99999));
@@ -105,6 +113,13 @@ public class LoginController {
         map.put("id", id);
         result.setMsg(JSON.toJSONString(map));
         return result;
+    }
+
+    private boolean checkRequestCount(HttpServletRequest request, String phone) {
+        String ip = IPUtils.getIpAddress(request);
+        int ipCount = verificationCodeService.countIp(ip);
+        int phoneCount = verificationCodeService.countPhone(phone);
+
     }
 
     @Autowired

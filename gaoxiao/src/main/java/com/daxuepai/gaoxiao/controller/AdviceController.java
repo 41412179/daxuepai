@@ -24,6 +24,4 @@ public class AdviceController {
         result.setMsg(StatusCode.MISSING_PARAMS_EXCEPTION.getText());
         return  result;
     }
-
-
 }

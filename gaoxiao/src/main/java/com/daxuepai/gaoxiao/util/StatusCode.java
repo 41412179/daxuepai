@@ -20,7 +20,8 @@ public enum StatusCode {
     dont_need_exit(804, "没有用户登录，不需要退出"),
     exit_failed(805, "退出失败"),
     requet_too_buzy(806, "请求验证码太过频繁，请等会再尝试"),
-    empty_content(807, "内容不能为空" );
+    empty_content(807, "内容不能为空" ),
+    db_failed(808, "数据库异常");
 
 
     int code;

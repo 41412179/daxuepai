@@ -115,11 +115,17 @@ public class LoginController {
         return result;
     }
 
+    static int get_code_limit_count = 5;
     private boolean checkRequestCount(HttpServletRequest request, String phone) {
         String ip = IPUtils.getIpAddress(request);
         int ipCount = verificationCodeService.countIp(ip);
         int phoneCount = verificationCodeService.countPhone(phone);
-
+        if(ipCount > get_code_limit_count || phoneCount > get_code_limit_count){
+            logger.info("验证码调用太过频繁");
+            return false;
+        }else {
+            return true;
+        }
     }
 
     @Autowired

@@ -71,7 +71,6 @@ public class LoginController {
         }
 
         //前段校验phone
-        Result result = new Result();
         String code = String.valueOf(random.nextInt(99999));
         //把短信验证码插入
         int id = -1;
@@ -122,9 +121,9 @@ public class LoginController {
         int phoneCount = verificationCodeService.countPhone(phone);
         if(ipCount > get_code_limit_count || phoneCount > get_code_limit_count){
             logger.info("验证码调用太过频繁");
-            return false;
-        }else {
             return true;
+        }else {
+            return false;
         }
     }
 

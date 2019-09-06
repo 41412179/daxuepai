@@ -5,6 +5,8 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.Date;
+
 @Mapper
 public interface VerificationCodeDAO {
     @Insert("insert into phone_code_record (user_id, ip, date, phone) values(#{userId}, #{ip}, #{date}, #{phone})")
@@ -13,6 +15,6 @@ public interface VerificationCodeDAO {
     @Select("select count(*) as count from phone_code_record where ip = #{ip}")
     int countIP(String ip);
 
-    @Select("select count(*) as count from phone_code_record where phone = #{phone}")
-    int countPhone(String phone);
+    @Select("select count(*) as count from phone_code_record where phone = #{phone} date > #{date}")
+    int countPhone(String phone, Date date);
 }

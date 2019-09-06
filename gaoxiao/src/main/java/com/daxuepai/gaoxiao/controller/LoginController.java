@@ -77,8 +77,15 @@ public class LoginController {
             return result;
         }
 
-        //前段校验phone
+        //前段校验phone,全都是数字并且长度是5
         String code = String.valueOf(random.nextInt(99999));
+        while (true){
+            if(code.length() == 5){
+                break;
+            }else {
+                code = String.valueOf(random.nextInt(99999));
+            }
+        }
         //把短信验证码插入
         int id = -1;
         Code generatedCode = new Code();
@@ -89,16 +96,12 @@ public class LoginController {
         Date exiredTime = new Date(now.getTime()+300000);
         generatedCode.setExpiredTime(exiredTime);
         try {
-            id = codeService.insertCode(generatedCode);
+            codeService.insertCode(generatedCode);
         }catch (Exception e){
             logger.error("", e);
-//            logger.error(StatusCode.INSERT_SMS_FAILED.toString());
-//            throw new ServiceException(StatusCode.SERVER_BUSY.getCode());
             result = new Result(StatusCode.SERVER_BUSY);
             return result;
         }
-
-
         ZhenziSmsClient client = new ZhenziSmsClient(apiUrl,appId,appSecret);
         try {
             logger.info("phone = " + phone + "; code: " + code);
@@ -118,7 +121,6 @@ public class LoginController {
 
         result = new Result(StatusCode.SUCCESS);
         HashMap<String,Integer> map = new HashMap<>();
-        map.put("id", id);
         result.setMsg(JSON.toJSONString(map));
         return result;
     }

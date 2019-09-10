@@ -15,6 +15,6 @@ public interface VerificationCodeDAO {
     @Select("select count(*) as count from phone_code_record where ip = #{ip}")
     int countIP(String ip);
 
-    @Select("select count(*) as count from phone_code_record where phone = #{phone} date > #{date}")
-    int countPhone(String phone, Date date);
+    @Select("select count(*) as count from phone_code_record where phone = #{phone} and date > #{now}")
+    int countPhone(String phone, Date now);
 }

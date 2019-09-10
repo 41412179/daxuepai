@@ -7,6 +7,8 @@ import com.daxuepai.gaoxiao.util.StatusCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class VerificationCodeService {
 
@@ -28,7 +30,7 @@ public class VerificationCodeService {
 
     public int countPhone(String phone) throws ServiceException {
         try {
-            return verificationCodeDAO.countPhone(phone);
+            return verificationCodeDAO.countPhone(phone, new Date());
         }catch (Exception e){
             throw new ServiceException(StatusCode.db_failed);
         }

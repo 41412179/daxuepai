@@ -154,11 +154,6 @@
 		</dependency>
 	</dependencies>
 
-	<configuration>
-		<fork>true</fork>
-		<!--增加jvm参数-->
-		<jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
-	</configuration>
 
 	<dependencyManagement>
 		<dependencies>
